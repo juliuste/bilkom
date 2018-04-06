@@ -1,0 +1,53 @@
+{
+	"name": "bilkom",
+	"description": "Client for the polish Bilkom (PKP) railway API.",
+	"version": "1.0.0",
+	"keywords": [
+		"bilkom",
+		"pkp",
+		"ic",
+		"intercity",
+		"poland",
+		"polish",
+		"api",
+		"railways",
+		"railway",
+		"train"
+	],
+	"author": "Julius Tens <mail@juliustens.eu>",
+	"homepage": "https://github.com/juliuste/bilkom",
+	"repository": "juliuste/bilkom",
+	"bugs": "https://github.com/juliuste/bilkom/issues",
+	"main": "./index.js",
+	"files": [
+		"index.js",
+		"lib/*"
+	],
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.2",
+		"got": "^8.3.0",
+		"he": "^1.1.1",
+		"lodash.clone": "^4.5.0",
+		"lodash.isdate": "^4.0.1",
+		"lodash.isobject": "^3.0.2",
+		"lodash.isstring": "^4.0.1",
+		"lodash.merge": "^4.6.1",
+		"lodash.unionby": "^4.8.0",
+		"moment-timezone": "^0.5.14",
+		"p-whilst": "^1.0.0",
+		"slugg": "^1.2.1"
+	},
+	"devDependencies": {
+		"is-url-superb": "^2.0.0",
+		"tape": "^4.9.0",
+		"validate-fptf": "^1.2.4"
+	},
+	"scripts": {
+		"test": "node test.js",
+		"prepare": "npm test"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"license": "ISC"
+}
