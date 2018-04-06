@@ -9,6 +9,7 @@ JavaScript client for the [bilkom](https://bilkom.pl) PKP railway API\*. Complie
 [![Greenkeeper badge](https://badges.greenkeeper.io/juliuste/bilkom.svg)](https://greenkeeper.io/)
 [![dependency status](https://img.shields.io/david/juliuste/bilkom.svg)](https://david-dm.org/juliuste/bilkom)
 [![license](https://img.shields.io/github/license/juliuste/bilkom.svg?style=flat)](LICENSE)
+[![fptf version](https://fptf.badges.juliustens.eu/badge/juliuste/bilkom)](https://fptf.badges.juliustens.eu/link/juliuste/bilkom)
 [![chat on gitter](https://badges.gitter.im/juliuste.svg)](https://gitter.im/juliuste)
 
 ## Installation
