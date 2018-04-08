@@ -26,7 +26,7 @@ const bilkom = require('bilkom')
 
 This package contains data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format) and provides the following methods:
 
-- [`stations(opt)`](docs/stations.md) to get a list of operated stations (or search for a specific query), such as `Warszawa Centralna` or `Gdańsk Glowny`.
+- [`stations(opt)`](docs/stations.md) to get a list of operated stations (or search for a specific query), such as `Warszawa Centralna` or `Gdańsk Glowny`.  (Only stations in Poland.)
 - [`journeys(origin, destination, date, opt)`](docs/journeys.md) to get routes between stations.
 - [`departures(station, date)`](docs/departures.md) to get departures at a given station.
 
