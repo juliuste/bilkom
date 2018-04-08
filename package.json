@@ -1,6 +1,6 @@
 {
 	"name": "bilkom",
-	"description": "Client for the polish Bilkom (PKP) railway API.",
+	"description": "API Client & scraper for Bilkom (PKP, polish railways).",
 	"version": "1.0.0",
 	"keywords": [
 		"bilkom",
@@ -35,6 +35,7 @@
 		"lodash.unionby": "^4.8.0",
 		"moment-timezone": "^0.5.14",
 		"p-whilst": "^1.0.0",
+		"parse-jsonp": "^0.1.0",
 		"slugg": "^1.2.1"
 	},
 	"devDependencies": {

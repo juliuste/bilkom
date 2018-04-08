@@ -1,8 +1,8 @@
 # bilkom
 
-JavaScript client for the [bilkom](https://bilkom.pl) PKP railway API\*. Complies with the [friendly public transport format](https://github.com/public-transport/friendly-public-transport-format). Inofficial, using *bilkom* endpoints. Ask them for permission before using this module in production. *Work in progress.*
+JavaScript client and scraper for the [bilkom](https://bilkom.pl) PKP railway API\*. Complies with the [friendly public transport format](https://github.com/public-transport/friendly-public-transport-format). Inofficial, using *bilkom* endpoints. Ask them for permission before using this module in production. *Work in progress.*
 
-\*It's somewhere in between a scraper and an API client (scrapes JSON data).
+\*Some methods query an API, some other methods scrape data from the website.
 
 [![npm version](https://img.shields.io/npm/v/bilkom.svg)](https://www.npmjs.com/package/bilkom)
 [![Build Status](https://travis-ci.org/juliuste/bilkom.svg?branch=master)](https://travis-ci.org/juliuste/bilkom)
@@ -26,7 +26,7 @@ const bilkom = require('bilkom')
 
 This package contains data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format) and provides the following methods:
 
-- [`stations(query)`](docs/stations.md) to search for stations such as `Warszawa Centralna` or `Gdańsk Glowny`.
+- [`stations(opt)`](docs/stations.md) to get a list of operated stations (or search for a specific query), such as `Warszawa Centralna` or `Gdańsk Glowny`.
 - [`journeys(origin, destination, date, opt)`](docs/journeys.md) to get routes between stations.
 
 ## Similar Projects

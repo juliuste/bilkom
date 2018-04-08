@@ -6,23 +6,37 @@ const moment = require('moment-timezone')
 const isURL = require('is-url-superb')
 const bilkom = require('./index')
 
-tape('bilkom.stations', async (t) => {
-	let results = await bilkom.stations('a')
+tape('bilkom.stations (all)', async (t) => {
+	let results = await bilkom.stations()
+	t.ok(Array.isArray(results))
+	t.ok(results.length > 1000, 'stations length')
+
+	for (let s of results) {
+		validate(s)
+		t.ok(s.location.longitude > 10 && s.location.longitude < 25, 'longitude')
+		t.ok(s.location.latitude > 40 && s.location.latitude < 60, 'latitude')
+	}
+
+	t.end()
+})
+
+tape('bilkom.stations (query)', async (t) => {
+	let results = await bilkom.stations({query: 'a'})
 	t.ok(Array.isArray(results))
 	t.ok(results.length === 0, 'stations length')
 
-	results = await bilkom.stations('Krak')
+	results = await bilkom.stations({query: 'Krak'})
 	t.ok(Array.isArray(results))
-	t.ok(results.length >= 5, 'stations length')
+	t.ok(results.length >= 5 && results.length < 100, 'stations length')
 	for (let s of results) validate(s)
 
 	const krakowGl = results.find(x => x.name.indexOf('Kraków Gł') >= 0)
 	t.ok(krakowGl.location.longitude > 10 && krakowGl.location.longitude < 20, 'krakow longitude')
 	t.ok(krakowGl.location.latitude > 45 && krakowGl.location.latitude < 55, 'krakow latitude')
 
-	results = await bilkom.stations('Gda')
+	results = await bilkom.stations({query: 'Gda'})
 	t.ok(Array.isArray(results))
-	t.ok(results.length >= 5, 'stations length')
+	t.ok(results.length >= 5 && results.length < 100, 'stations length')
 	for (let s of results) validate(s)
 
 	const gdanskGl = results.find(x => x.name.indexOf('Gdańsk Gł') >= 0)
