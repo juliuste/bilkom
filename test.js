@@ -101,3 +101,56 @@ tape('bilkom.departures', async (t) => {
 
 	t.end()
 })
+
+tape('bilkom.journeyLeg', async (t) => {
+	const date = moment.tz('Europe/Warsaw').add(5, 'days').startOf('day').toDate()
+	const departures = await bilkom.departures(przemysl, date)
+	t.ok(Array.isArray(departures), 'precondition')
+	t.ok(departures.length >= 5, 'precondition')
+
+	let leg = departures.find(x => x.line.product === 'ICP')
+	t.ok(leg, 'precondition a')
+	t.ok(leg.line, 'precondition a')
+	t.ok(leg.line.product, 'precondition a')
+	t.ok(leg.line.id, 'precondition a')
+
+	let details = await bilkom.journeyLeg(leg.journeyId, leg.line.product, leg.line.id)
+	t.ok(details)
+	t.ok(details.journeyId === leg.journeyId)
+	t.ok(details.line.type === leg.line.type)
+	t.ok(details.line.id === leg.line.id)
+	t.ok(details.line.product === leg.line.product)
+
+	for (let stop of details.stops) {
+		validate(stop.station)
+		t.ok(stop.station.location)
+		t.ok(stop.arrival || stop.departure)
+		if (stop.arrival) t.ok(+new Date(stop.arrival) > +date)
+		if (stop.departure) t.ok(+new Date(stop.departure) > +date)
+		if (stop.arrival && stop.departure) t.ok(+new Date(stop.arrival) <= +new Date(stop.departure))
+	}
+
+
+	leg = departures.find(x => x.line.product === 'D')
+	t.ok(leg, 'precondition b')
+	t.ok(leg.line, 'precondition b')
+	t.ok(leg.line.product, 'precondition b')
+	t.ok(leg.line.id, 'precondition b')
+
+	details = await bilkom.journeyLeg(leg.journeyId, leg.line.product, leg.line.id)
+	t.ok(details)
+	t.ok(details.journeyId === leg.journeyId)
+	t.ok(details.line.type === leg.line.type)
+	t.ok(details.line.id === leg.line.id)
+	t.ok(details.line.product === leg.line.product)
+
+	for (let stop of details.stops) {
+		validate(stop.station)
+		t.ok(stop.arrival || stop.departure)
+		if (stop.arrival) t.ok(+new Date(stop.arrival) > +date)
+		if (stop.departure) t.ok(+new Date(stop.departure) > +date)
+		if (stop.arrival && stop.departure) t.ok(+new Date(stop.arrival) <= +new Date(stop.departure))
+	}
+
+	t.end()
+})
