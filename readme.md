@@ -28,6 +28,7 @@ This package contains data in the [*Friendly Public Transport Format*](https://g
 
 - [`stations(opt)`](docs/stations.md) to get a list of operated stations (or search for a specific query), such as `Warszawa Centralna` or `Gdańsk Glowny`.
 - [`journeys(origin, destination, date, opt)`](docs/journeys.md) to get routes between stations.
+- [`departures(station, date)`](docs/departures.md) to get departures at a given station.
 
 ## Similar Projects
 

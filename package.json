@@ -36,6 +36,7 @@
 		"moment-timezone": "^0.5.14",
 		"p-whilst": "^1.0.0",
 		"parse-jsonp": "^0.1.0",
+		"query-string": "^6.0.0",
 		"slugg": "^1.2.1"
 	},
 	"devDependencies": {

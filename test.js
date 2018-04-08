@@ -3,6 +3,7 @@
 const tape = require('tape')
 const validate = require('validate-fptf')
 const moment = require('moment-timezone')
+const isString = require('lodash.isstring')
 const isURL = require('is-url-superb')
 const bilkom = require('./index')
 
@@ -49,8 +50,8 @@ tape('bilkom.stations (query)', async (t) => {
 const szczecin = '005100057'
 const przemysl = '005100234'
 
-// const gdansk = '005100009'
-// const gdynia = '005100010'
+const gdansk = '005100009'
+const gdynia = '005100010'
 
 tape('bilkom.journeys', async (t) => {
 	const journeys = await bilkom.journeys(szczecin, przemysl, moment.tz('Europe/Warsaw').add(5, 'days').startOf('day').add(7, 'hours').toDate(), {duration: 12*60*60*1000, prices: true})
@@ -75,4 +76,28 @@ tape('bilkom.journeys', async (t) => {
 		}
 
 		t.end()
+})
+
+tape('bilkom.departures', async (t) => {
+	const momentDate = moment.tz('Europe/Warsaw').add(5, 'days').startOf('day')
+	const departures = await bilkom.departures(gdansk, momentDate.toDate())
+
+	t.ok(Array.isArray(departures))
+	t.ok(departures.length > 50, 'departures length')
+
+	const day = momentDate.format('DDMMYYYY')
+	for (let d of departures) {
+		t.ok(d.journeyId && isString(d.journeyId), 'departure journeyId')
+		t.ok(d.station && isString(d.station), 'departure station')
+		validate(d.line)
+		t.ok(d.line.product && isString(d.line.product), 'departure line.product')
+
+		t.ok(d.when && isString(d.when), 'departure when')
+		const tDay = moment(d.when).format('DDMMYYYY')
+		t.ok(day === tDay)
+
+		t.ok(d.direction && isString(d.direction), 'departure direction')
+	}
+
+	t.end()
 })
