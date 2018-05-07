@@ -35,7 +35,7 @@
 		"lodash.unionby": "^4.8.0",
 		"moment-timezone": "^0.5.14",
 		"p-whilst": "^1.0.0",
-		"parse-jsonp": "^0.1.0",
+		"parse-jsonp": "^1.0.0",
 		"query-string": "^6.0.0",
 		"slugg": "^1.2.1"
 	},
