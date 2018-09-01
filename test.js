@@ -1,9 +1,9 @@
 'use strict'
 
 const tape = require('tape')
-const validate = require('validate-fptf')
+const validate = require('validate-fptf')()
 const moment = require('moment-timezone')
-const isString = require('lodash.isstring')
+const isString = require('lodash/isString')
 const isURL = require('is-url-superb')
 const bilkom = require('./index')
 
@@ -55,27 +55,31 @@ const gdynia = '005100010'
 
 tape('bilkom.journeys', async (t) => {
 	const journeys = await bilkom.journeys(szczecin, przemysl, moment.tz('Europe/Warsaw').add(5, 'days').startOf('day').add(7, 'hours').toDate(), {duration: 12*60*60*1000, prices: true})
-		t.ok(journeys.length > 3, 'journeys length')
+	t.ok(journeys.length > 3, 'journeys length')
 
-		for (let j of journeys) {
-			validate(j)
+	for (let j of journeys) {
+		validate(j)
+		for (let l of j.legs) {
+			for (let s of l.stopovers) validate(s)
+			validate(l.line)
 		}
+	}
 
-		t.ok(journeys[0].legs[0].origin.id === szczecin, 'origin id')
-		t.ok(journeys[0].legs[journeys[0].legs.length-1].destination.id === przemysl, 'destination id')
+	t.ok(journeys[0].legs[0].origin.id === szczecin, 'origin id')
+	t.ok(journeys[0].legs[journeys[0].legs.length-1].destination.id === przemysl, 'destination id')
 
-		t.ok(journeys[0].legs.every(l => l.operator.id === 'PKP'), 'leg operator')
+	t.ok(journeys[0].legs.every(l => l.operator.id === 'PKP'), 'leg operator')
 
-		t.ok(journeys.some(j => j.price), 'price')
-		for (let journey of journeys) {
-			if (journey.price) {
-				t.ok(journey.price.amount > 0, 'price amount')
-				t.ok(journey.price.currency === 'PLN', 'price currency')
-				t.ok(isURL(journey.price.url), 'price url')
-			}
+	t.ok(journeys.some(j => j.price), 'price')
+	for (let journey of journeys) {
+		if (journey.price) {
+			t.ok(journey.price.amount > 0, 'price amount')
+			t.ok(journey.price.currency === 'PLN', 'price currency')
+			t.ok(isURL(journey.price.url), 'price url')
 		}
+	}
 
-		t.end()
+	t.end()
 })
 
 tape('bilkom.departures', async (t) => {
@@ -108,7 +112,7 @@ tape('bilkom.journeyLeg', async (t) => {
 	t.ok(Array.isArray(departures), 'precondition')
 	t.ok(departures.length >= 5, 'precondition')
 
-	let leg = departures.find(x => x.line.product === 'ICP')
+	let leg = departures.find(x => x.line.product === 'IC')
 	t.ok(leg, 'precondition a')
 	t.ok(leg.line, 'precondition a')
 	t.ok(leg.line.product, 'precondition a')
@@ -121,13 +125,9 @@ tape('bilkom.journeyLeg', async (t) => {
 	t.ok(details.line.id === leg.line.id)
 	t.ok(details.line.product === leg.line.product)
 
-	for (let stop of details.stops) {
-		validate(stop.station)
-		t.ok(stop.station.location)
-		t.ok(stop.arrival || stop.departure)
-		if (stop.arrival) t.ok(+new Date(stop.arrival) > +date)
-		if (stop.departure) t.ok(+new Date(stop.departure) > +date)
-		if (stop.arrival && stop.departure) t.ok(+new Date(stop.arrival) <= +new Date(stop.departure))
+	for (let stopover of details.stopovers) {
+		validate(stopover)
+		t.ok(stopover.stop.location)
 	}
 
 
@@ -144,12 +144,8 @@ tape('bilkom.journeyLeg', async (t) => {
 	t.ok(details.line.id === leg.line.id)
 	t.ok(details.line.product === leg.line.product)
 
-	for (let stop of details.stops) {
-		validate(stop.station)
-		t.ok(stop.arrival || stop.departure)
-		if (stop.arrival) t.ok(+new Date(stop.arrival) > +date)
-		if (stop.departure) t.ok(+new Date(stop.departure) > +date)
-		if (stop.arrival && stop.departure) t.ok(+new Date(stop.arrival) <= +new Date(stop.departure))
+	for (let stopover of details.stopovers) {
+		validate(stopover)
 	}
 
 	t.end()

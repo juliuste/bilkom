@@ -32,7 +32,12 @@ bilkom.departures(krakow, new Date())
             product: "ICP",
             name: "ICP 31104",
             mode: "train",
-            operator: "PKP"
+            operator: {
+                type: "operator",
+                id: "PKP",
+                name: "PKP",
+                url: "https://www.bilkom.pl"
+            }
         },
         direction: "Łódź Fabryczna"
     },
@@ -47,7 +52,12 @@ bilkom.departures(krakow, new Date())
             product: "KML",
             name: "KML 33256",
             mode: "train",
-            operator: "PKP"
+            operator: {
+                type: "operator",
+                id: "PKP",
+                name: "PKP",
+                url: "https://www.bilkom.pl"
+            }
         },
         direction: "Wieliczka Rynek-Kopalnia"
     }
