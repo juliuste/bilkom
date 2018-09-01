@@ -84,7 +84,8 @@ bilkom.journeys(krakow, gdansk, new Date(), {
                     type: "line",
                     id: "38170",
                     product: "TLK",
-                    name: "TLK 38170"
+                    name: "TLK 38170",
+                    mode: "train"
                 },
                 stopovers: [
                     {

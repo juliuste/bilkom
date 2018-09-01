@@ -34,9 +34,10 @@ bilkom.journeyLeg('1|180746|0|51|2062018', 'D', '35')
         name: "D 35",
         product: "D"
     },
-    stops: [
+    stopovers: [
         {
-            station: {
+            type: "stopover",
+            stop: {
                 type: "station",
                 id: "005100234",
                 name: "Przemyśl Główny",
@@ -50,7 +51,8 @@ bilkom.journeyLeg('1|180746|0|51|2062018', 'D', '35')
             departure: "2018-06-02T18:09:00+02:00"
         },
         {
-            station: {
+            type: "stopover",
+            stop: {
                 type: "station",
                 id: "002200025",
                 name: "Lviv"
@@ -59,7 +61,8 @@ bilkom.journeyLeg('1|180746|0|51|2062018', 'D', '35')
             departure: "2018-06-02T23:28:00+02:00"
         },
         {
-            station: {
+            type: "stopover",
+            stop: {
                 type: "station",
                 id: "002200215",
                 name: "Krasne(UA)"
