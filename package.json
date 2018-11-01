@@ -1,6 +1,6 @@
 {
 	"name": "bilkom",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "API Client & scraper for Bilkom (PKP, polish railways).",
 	"keywords": [
 		"api",
