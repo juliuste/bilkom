@@ -5,7 +5,7 @@ const validate = require('validate-fptf')()
 const moment = require('moment-timezone')
 const isString = require('lodash/isString')
 const isURL = require('is-url-superb')
-const bilkom = require('./index')
+const bilkom = require('.')
 
 tape('bilkom.stations (all)', async (t) => {
 	let results = await bilkom.stations()

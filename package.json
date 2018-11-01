@@ -1,28 +1,35 @@
 {
 	"name": "bilkom",
-	"description": "API Client & scraper for Bilkom (PKP, polish railways).",
 	"version": "3.0.0",
+	"description": "API Client & scraper for Bilkom (PKP, polish railways).",
 	"keywords": [
+		"api",
 		"bilkom",
-		"pkp",
 		"ic",
 		"intercity",
+		"pkp",
 		"poland",
 		"polish",
-		"api",
-		"railways",
 		"railway",
+		"railways",
 		"train"
 	],
-	"author": "Julius Tens <mail@juliustens.eu>",
 	"homepage": "https://github.com/juliuste/bilkom",
-	"repository": "juliuste/bilkom",
 	"bugs": "https://github.com/juliuste/bilkom/issues",
-	"main": "./index.js",
+	"repository": "juliuste/bilkom",
+	"license": "ISC",
+	"author": "Julius Tens <mail@juliustens.eu>",
 	"files": [
-		"index.js",
 		"lib/*"
 	],
+	"main": "lib/index.js",
+	"scripts": {
+		"check-deps": "depcheck",
+		"fix": "eslint --fix lib",
+		"lint": "eslint lib",
+		"prepublishOnly": "npm test",
+		"test": "npm run lint && npm run check-deps && node test"
+	},
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.2",
 		"got": "^9.2.0",
@@ -35,16 +42,18 @@
 		"slugg": "^1.2.1"
 	},
 	"devDependencies": {
+		"depcheck": "^0.6.11",
+		"eslint": "^5.8.0",
+		"eslint-config-standard": "^12.0.0",
+		"eslint-plugin-import": "^2.14.0",
+		"eslint-plugin-node": "^8.0.0",
+		"eslint-plugin-promise": "^4.0.1",
+		"eslint-plugin-standard": "^4.0.0",
 		"is-url-superb": "^2.0.0",
 		"tape": "^4.9.1",
 		"validate-fptf": "^2.1.1"
 	},
-	"scripts": {
-		"test": "node test.js",
-		"prepublishOnly": "npm test"
-	},
 	"engines": {
 		"node": ">=8"
-	},
-	"license": "ISC"
+	}
 }
