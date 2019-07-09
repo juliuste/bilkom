@@ -34,7 +34,7 @@
 		"cheerio": "^1.0.0-rc.2",
 		"got": "^9.2.0",
 		"he": "^1.1.1",
-		"lodash": "^4.17.10",
+		"lodash": "^4.17.13",
 		"moment-timezone": "^0.5.21",
 		"p-whilst": "^1.0.0",
 		"parse-jsonp": "^1.0.0",
